@@ -120,6 +120,6 @@ gemKnap.addEventListener("click", async function saveActivity() {
 
 //loader den første valgmulighed som default
 document.addEventListener('DOMContentLoaded', () => {
-    activities = almindeligeHverdagsaktiviteter;
+    const activities = almindeligeHverdagsaktiviteter;
     populateActivityDropdown(activities);
 });
