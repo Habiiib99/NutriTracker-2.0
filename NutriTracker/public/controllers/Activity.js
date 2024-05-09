@@ -81,6 +81,7 @@ function populateActivityDropdown(activities) {
 const gemKnap = document.getElementById("save");
 
 gemKnap.addEventListener("click", async function saveActivity() {
+        alert('Aktivitet gemt!'); 
     try {
         // Hent brugeroplysninger fra localStorage
         const user = JSON.parse(localStorage.getItem('user'));
@@ -115,4 +116,10 @@ gemKnap.addEventListener("click", async function saveActivity() {
         console.error('Fejl:', error);
         throw new Error('Fejl ved oprettelse af aktivitet: ' + error.message);
     }
+});
+
+//loader den første valgmulighed som default
+document.addEventListener('DOMContentLoaded', () => {
+    activities = almindeligeHverdagsaktiviteter;
+    populateActivityDropdown(activities);
 });
