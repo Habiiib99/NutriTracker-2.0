@@ -82,10 +82,7 @@ CREATE TABLE dbo.meal_ingredients (
     FOREIGN KEY (ingredientId) REFERENCES dbo.ingredients(ingredientId),
     FOREIGN KEY (userId) REFERENCES dbo.profiles(userId) -- Define foreign key constraint
 );
--- ** Tilføje lokation og dato
---ALTER TABLE dbo.meal_ingredients
---ADD location VARCHAR(255) NOT NULL DEFAULT 'Unknown', 
-  --  consumptionDate DATETIME NOT NULL DEFAULT GETDATE();
+
 
 
 
