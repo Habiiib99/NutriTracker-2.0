@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="./assets/Billede2.png" alt="NutriTracker Logo" class="navbar-logo" />
+        <a href="mealcreator.html">Meal Creator</a>
+        <a href="mealtracker.html" class="active">Meal Tracker</a>
+        <a href="Activity.html">Activity Tracker</a>
+        <a href="dailyNutri.html">Daily Nutri</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+
+    <div class="meal-tracker-container">
+        <h1>Meal Tracker</h1>
+        <form id="meal-registration-form">
+            <select id="meal-select-dropdown"></select>
+            <input type="number" id="meal-weight" placeholder="Total vægt(g)" required>
+            <input type="datetime-local" id="meal-time" required>
+            <button type="submit">Registrér måltid</button>
+        </form>
+
+        <form id="ingredient-registration-form">
+          <input  list="ingredient-list" type="text" id="ingredient" placeholder="Ingrediens Navn" autocomplete="off"required>
+            <datalist id="ingredient-list"> </datalist>
+            <input type="number" id="foodID" placeholder="Food ID" required>
+            <input type="number" id="ingredient-weight" placeholder="Vægt (g)" required>
+            <button type="submit">Registrér ingrediens</button>
+        </form>
+
+        <form id="water-registration-form">
+            <input type="number" id="water-amount" placeholder="Vand (ml)" required>
+            <button type="submit">Registrér vandindtag</button>
+        </form>
+        
+        
+
+        <div id="registered-meals">
+            <!-- Registered meals will be displayed here -->
+        </div>
+
+        <div id="registered-ingredients">
+            <!-- Ingredienser vises her -->
+        </div>
+        
+        <div id="registered-water">
+            <!-- Vandindtagslog vil blive vist her -->
+        </div>
+        
+       
+    </div>
+
+    <script src="./controllers/mealtracker.js"></script>
+    <script src="./controllers/mealIngredientTracker.js"></script>
+    <script src="./controllers/waterTracker.js"></script>
+</body>
+</html>
