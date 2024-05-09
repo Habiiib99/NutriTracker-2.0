@@ -44,6 +44,7 @@ async function registerWaterIntake() {
             if (response.ok) {
                 const result = await response.json();
                 alert('Vandet er blevet registreret.');
+                updateWaterLogDisplay();
             } else {
                 const error = await response.json();
                 console.error('Fejl ved registrering:', error);
