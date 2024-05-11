@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       // Sæt den passende URL baseret på visningstilstand
       if (viewMode === 'daily') {
-        url = `http://localhost:2220/api/daily-nutri/hourly/${userId}`;
+        url = `http://localhost:3000/api/dailynutri/api/daily-nutri/hourly/${userId}`;
       } else if (viewMode === 'monthly') {
-        url = `http://localhost:2220/api/daily-nutri/monthly/${userId}`;
+        url = `http://localhost:3000/api/dailynutri/api/daily-nutri/monthly/${userId}`;
       } else {
         console.error('Ugyldig visningstilstand.');
         return;
@@ -47,7 +47,7 @@ console.log(data);
     entries.forEach(entry => {
       let timeLabel = entry.hour !== undefined ? `${entry.hour}:00` : entry.date;
       if (entry.hour === 0) {
-        timeLabel = '24:00';
+        timeLabel = '00:00';
       }
 
       const row = `
