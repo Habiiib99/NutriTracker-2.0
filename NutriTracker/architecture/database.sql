@@ -47,7 +47,6 @@ CREATE TABLE dbo.meals (
     ingredients VARCHAR(255),
     FOREIGN KEY (userId) REFERENCES dbo.profiles(userId)
 );
--- add weight decimal(5,2) null;
 
 CREATE TABLE dbo.tracker (
     trackerId INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
