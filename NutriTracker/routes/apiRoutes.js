@@ -1,14 +1,20 @@
+import express from 'express'; // Importér express til at oprette en router til endpoints i applikationen. 
+// Express er et minimalt og fleksibelt Node.js webapplikationsframework, der giver et kraftfuldt sæt funktioner til udvikling af web- og mobilapplikationer.
+// Express er designet til at hjælpe med at organisere en webapplikation i et MVC-arkitekturmønster på serveren.
+// Express giver en række kraftfulde funktioner til udvikling af webapplikationer og API'er.
 
-import express from 'express';
-import sql from 'mssql';
+import sql from 'mssql'; // Importér mssql til at oprette forbindelse til databasen
 import { dbConfig } from '../config/database.js'; // Importér databasekonfigurationen
 
+// Opretter en router til endpoints i applikationen
+const app = express.Router(); // router er en del af express, som bruges til at oprette endpoints i applikationen
+// router fungere som en mini-applikation med mulighed for at definere middleware og routes
+// router kan bruges til at gruppere routes og middleware, så det er nemmere at håndtere og konfigurere
+// det er vigtigt at huske at eksportere routeren, så den kan bruges i andre filer
 
-const app = express.Router();
+const apiKey = '169792'; // API-nøgle til at hente data fra API'en
 
-const apiKey = '169792';
-
-// Konstanter for sortKeys
+// Konstanter for sortKeys til næringsværdier der hentes fra API'en
 const ProteinKey = 1110; // SortKey for protein
 const kcalKey = 1030; // SortKey for kcal
 const fatKey = 1310; // SortKey for fedt
@@ -26,23 +32,23 @@ async function fetchFoodID(searchString) {
       const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-          'X-API-Key': apiKey,
+          'Content-Type': 'application/json', // Angiver at data er i JSON-format
+          'X-API-Key': apiKey, // Angiver API-nøglen
         },
       });
       if (response.ok) {
         // Behandler svaret fra API'en.
-        const result = await response.json();
+        const result = await response.json(); // Konverterer svaret til JSON-format
         // Sender det første foodID, hvis GET-anmodningen lykkes. Spørgsmål. Skulle dette ikke være så man kan vælge mellem alle mulighederne?
         return result[0].foodID;
       // Hvis GET-anmodningen ikke lykkes, logges fejl til konsollen med fejlmeddelelse med response-status.
       } else {
-        console.error('Failed to fetch data. Status:', response.status);
+        console.error('Failed to fetch data. Status:', response.status); // Udskriver fejlmeddelelse til konsollen
         return null;
       }
       // Hvis der sker en fejl i løbet af anmodningen, logges fejl til konsollen med fejl ved at fetche data.
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error); // Udskriver fejlmeddelelse til konsollen
       return null;
     }
   }
@@ -53,11 +59,11 @@ async function fetchFoodID(searchString) {
     const url = `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/${sortKey}`;
     try {
       // GET-anmodning til at hente næringsværdierne fra API'en.
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-Key': apiKey,
+      const response = await fetch(url, { // Fetcher data fra API'en
+        method: 'GET', // Anmodningstype
+        headers: { // Angiver headers for anmodningen
+          'Content-Type': 'application/json', // Angiver at data er i JSON-format
+          'X-API-Key': apiKey, // Angiver API-nøglen
         },
       });
       // Behandler svaret fra API'en.
@@ -86,10 +92,10 @@ async function fetchFoodID(searchString) {
   // Endpoint for at søge efter fødevarer
   app.get('/search-food/:searchString', async (req, res) => {
     try {
-      const foodID = await fetchFoodID(req.params.searchString);
-      if (foodID) {
+      const foodID = await fetchFoodID(req.params.searchString); // Henter foodID baseret på søgestrengen
+      if (foodID) { // Hvis foodID findes, returneres det
         res.json({ foodID });
-      } else {
+      } else { // Hvis foodID ikke findes, returneres en fejlmeddelelse
         res.status(404).json({ message: 'Fødevare ikke fundet' });
       }
     } catch (error) {
@@ -99,16 +105,16 @@ async function fetchFoodID(searchString) {
   // Endpoint for at hente næringsværdier baseret på foodID og sortKey
   app.get('/nutrient-value/:foodID/:sortKey', async (req, res) => {
     try {
-      const nutrientValue = await fetchNutrientValue(req.params.foodID, req.params.sortKey);
-      if (nutrientValue) {
+      const nutrientValue = await fetchNutrientValue(req.params.foodID, req.params.sortKey); // Henter næringsværdier baseret på foodID og sortKey
+      if (nutrientValue) { // Hvis næringsværdier findes, returneres de
         res.json({ nutrientValue });
       } else {
-        res.status(404).json({ message: 'Næringsværdi ikke fundet' });
+        res.status(404).json({ message: 'Næringsværdi ikke fundet' }); // Hvis næringsværdier ikke findes, returneres en fejlmeddelelse
       }
-    } catch (error) {
-      res.status(500).json({ message: 'Server fejl', error });
+    } catch (error) { // Hvis der opstår en fejl under hentning af næringsværdier
+      res.status(500).json({ message: 'Server fejl', error }); // Hvis der opstår en fejl, returneres en fejlmeddelelse
     }
   });
 
 
-export default app;
+export default app; // Eksporterer app routeren til brug i server.js filen
