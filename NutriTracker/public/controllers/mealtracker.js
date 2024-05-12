@@ -2,6 +2,9 @@ const apiKey = '169792'
 
 // Dropdown-menuen skal udfyldes med måltider fra databasen
 function populateMealDropdown() {
+  
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userId = user.userId;
   fetch('http://localhost:3000/api/mealtracker/api/meals')  // Send GET-anmodning for at hente måltider fra databasen
     .then(response => response.json())
     .then(meals => { 
@@ -10,11 +13,12 @@ function populateMealDropdown() {
 
     // For each bruges til at oprette en valgmulighed for hvert måltid
     meals.forEach(meal => {
+      if(meal.userId === userId){
       const option = document.createElement('option');
       option.value = meal.mealId;  // Hver option får en værdi svarende til måltidets id. Dette bliver nyttigt senere
       option.textContent = meal.mealName; // Vis måltidets navn
       mealDropdown.appendChild(option);
-    });
+    }});
   })
   .catch(error => {
     console.error('Error loading meals:', error);
