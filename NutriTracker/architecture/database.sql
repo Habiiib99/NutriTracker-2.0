@@ -57,7 +57,7 @@ CREATE TABLE dbo.tracker (
     consumptionDate DATETIME NOT NULL DEFAULT GETDATE(),
     location VARCHAR(255) NOT NULL,
     FOREIGN KEY (mealId) REFERENCES dbo.meals(mealId),
-    FOREIGN KEY (mealIngredientId) REFERENCES dbo.meal_ingredients(mealIngredientId), -- Add foreign key constraint
+    FOREIGN KEY (mealIngredientId) REFERENCES dbo.meal_ingredients(mealIngredientId),
     FOREIGN KEY (userId) REFERENCES dbo.profiles(userId)
 );
 
