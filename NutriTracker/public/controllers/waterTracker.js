@@ -1,4 +1,5 @@
 // Funktion til at registrere vandindtag
+
 async function registerWaterIntake() {
     const waterAmount = document.getElementById('water-amount').value; // Vandmængde i ml
     const user = JSON.parse(localStorage.getItem('user')); // Hent brugeroplysninger fra localStorage
@@ -10,29 +11,29 @@ async function registerWaterIntake() {
     const consumptionDate = new Date().toISOString(); // Automatisk aktuelt tidspunkt
     let location = 'Unknown';
   
-    // Kontroller, at alle nødvendige data er til stede
+    // Den nødvendige data skal være til stede
     if (!waterAmount || !userId) {
         alert('Sørg for at være logget ind og indtaste mængden af vand.');
         return;
     }
   
-    // Hent geolocation, hvis det er tilgængeligt
+    // Lokation hentes, hvis det er muligt
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
         (position) => {
             location = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
-            sendWaterData(); // Send data, når lokationen er fundet
+            sendWaterData(); // Send data med lokation
         },
         (error) => {
             console.warn('Geolocation ikke tilgængelig:', error.message);
-            sendWaterData(); // Send data med 'Unknown' lokation
+            sendWaterData(); // Send data med ukendt lokation
         }
     );
 } else {
-    sendWaterData(); // Send data med 'Unknown' lokation
+    sendWaterData(); // Send data med ukendt lokation
 }
   
-    // Funktion til at sende vandindtagsdata til serveren
+    // Funktion som sender data fra før til databasen
     async function sendWaterData() {
         try {
             const response = await fetch('http://localhost:3000/api/watertracker/api/water-tracker', {
@@ -44,7 +45,7 @@ async function registerWaterIntake() {
             if (response.ok) {
                 const result = await response.json();
                 alert('Vandet er blevet registreret.');
-                updateWaterLogDisplay();
+                updateWaterLogDisplay(); // UI opdateres efter registrering
             } else {
                 const error = await response.json();
                 console.error('Fejl ved registrering:', error);
@@ -56,16 +57,16 @@ async function registerWaterIntake() {
   }
   
   // Rediger vandindtag
-  async function editWaterIntake(id) {
+  async function editWaterIntake(id) { // Der tages imod et id som parameter for at identificere det vandindtag, der skal redigeres
     const newAmount = prompt('Indtast ny vandmængde (ml):');
-    if (!newAmount || isNaN(newAmount)) {
+    if (!newAmount || isNaN(newAmount)) { // Der sørges for at mængden er gyldig
         alert('Indtast venligst en gyldig vandmængde.');
         return;
     }
   
     try {
         const response = await fetch(`http://localhost:3000/api/watertracker/api/water-tracker/${id}`, {
-            method: 'PUT',
+            method: 'PUT', // Vi bruger PUT da vi opdaterer data
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amountOfWater: newAmount })
         });
@@ -73,8 +74,8 @@ async function registerWaterIntake() {
         const result = await response.json();
         if (response.ok) {
             alert('Vandet er blevet registreret');
-            // Opdater visningen af vandindtag
-            updateWaterLogDisplay();
+
+            updateWaterLogDisplay(); // Opdater brugeren UI
         } else {
             console.error('Fejl ved redigering:', result);
         }
@@ -84,18 +85,18 @@ async function registerWaterIntake() {
   }
   
   // Slet vandindtag
-  async function deleteWaterIntake(id) {
+  async function deleteWaterIntake(id) { // På samme måde som ved redigering, tages et id som parameter for at identificere det vandindtag, der skal slettes
     try {
         const response = await fetch(`http://localhost:3000/api/watertracker/api/water-tracker/${id}`, {
-            method: 'DELETE',
+            method: 'DELETE', // Vi bruger DELETE da vi sletter data
             headers: { 'Content-Type': 'application/json' }
         });
   
         const result = await response.json();
         if (response.ok) {
             alert('Vandet er blevet registreret');
-            // Opdater visningen af vandindtag
-            updateWaterLogDisplay();
+        
+            updateWaterLogDisplay(); // UI opdateres efter sletning
         } else {
             console.error('Fejl ved sletning:', result);
         }
@@ -105,9 +106,9 @@ async function registerWaterIntake() {
   }
   
   
-  
+  // Funktion til at opdatere HTML med vandindtag
   async function updateWaterLogDisplay() {
-    const user = JSON.parse(localStorage.getItem('user')); // Hent brugerens ID fra localStorage
+    const user = JSON.parse(localStorage.getItem('user')); // Henter brugerens oplysninger fra localStorage 
     if (!user || !user.userId) {
         console.error('Bruger ikke fundet.');
         return;
@@ -118,14 +119,14 @@ async function registerWaterIntake() {
         const response = await fetch(`http://localhost:3000/api/watertracker/api/water-tracker/user/${user.userId}`);
         const waterLog = await response.json();
   
-        // Reference til HTML-elementet, hvor loggen vises
+        // Container til at vise vandindtag hentes fra HTML
         const waterLogContainer = document.getElementById('registered-water');
         waterLogContainer.innerHTML = '';
   
-        // Gennemgå vandindtagsdataene og generer HTML for hver post
-        waterLog.forEach(entry => {
+        // Gennemgå vandindtagsregistreringer og generer HTML for hver post
+        waterLog.forEach(entry => { // forEach-loop til at gennemgå vandindtagene
             const waterEntryDiv = document.createElement('div');
-            waterEntryDiv.className = 'water-entry';
+            waterEntryDiv.className = 'water-entry'; // Hver div og span får en class så de nemt kan styles senere
             waterEntryDiv.innerHTML = `
                 <div class="water-details">
                     <span class="water-amount">${entry.amountOfWater} ml</span>
@@ -136,7 +137,7 @@ async function registerWaterIntake() {
                     <button class="delete-water-btn" data-id="${entry.waterRegId}">Slet</button>
                 </div>
             `;
-            waterLogContainer.appendChild(waterEntryDiv);
+            waterLogContainer.appendChild(waterEntryDiv); // Hver div indsættes i containeren
         });
     } catch (error) {
         console.error('Fejl ved hentning af vandindtag:', error);
@@ -145,7 +146,7 @@ async function registerWaterIntake() {
   
   
   
-  // Opdater visningen af vandindtag efter registrering
+  // eventListener til at registrere vandindtag og opdatere UI
   document.getElementById('water-registration-form').addEventListener('submit', function (event) {
     event.preventDefault();
     registerWaterIntake().then(updateWaterLogDisplay);
