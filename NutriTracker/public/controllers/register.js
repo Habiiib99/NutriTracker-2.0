@@ -1,12 +1,13 @@
 document.getElementById('redirect-to-login-button').addEventListener('click', function () {
-    window.location.href = 'login.html'
+    window.location.href = 'login.html' // Det er muligt for brugeren at logge ind frem for at registrere sig
   })
   
   document.getElementById('register-button').addEventListener('click', function () {
     event.preventDefault()
-    submitRegistration()
+    submitRegistration() // eventListener som kalder nedstående funktion
   })
   
+  // Registrerer en bruger i databasen
   function submitRegistration() {
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
@@ -15,6 +16,7 @@ document.getElementById('redirect-to-login-button').addEventListener('click', fu
     const weight = document.getElementById('weight').value
     const name = document.getElementById('name').value
   
+    // Data hentes fra inputfelterne og gemmes i et objekt
     const data = {
       email,
       password,
@@ -26,6 +28,7 @@ document.getElementById('redirect-to-login-button').addEventListener('click', fu
   
     console.log('Submitting data', data)
   
+    // Post request til at sende data
     fetch('http://localhost:3000/api/account/register', {
       method: 'POST',
       headers: {
