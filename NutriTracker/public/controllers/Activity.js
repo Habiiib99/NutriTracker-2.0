@@ -1,4 +1,4 @@
-// Definition af objekter for forskellige typer aktiviteter
+// her defineres objekterne til de forskellige aktiviteter, som brugeren kan vælge imellem.
 const almindeligeHverdagsaktiviteter = {
     "Almindelig gang": 215,
     "Gang ned af trapper": 414,
@@ -48,13 +48,13 @@ const forskelligeTyperArbejde = {
     "Hugge og slæbe på brænde": 1168
 };
 
-// Referencer til HTML-elementer
+// Definerer variabler til de forskellige elementer i HTML-dokumentet
 const activityTypeSelect = document.getElementById("activityType");
 const activityNameSelect = document.getElementById("activityName");
 const minutesInput = document.getElementById("minutes");
 
-// Funktion til at udfylde aktivitetsdropdown-menuen baseret på den valgte type
-activityTypeSelect.addEventListener("change", function () {
+// eventlistener til at ændre aktivitetsdropdown-menuen baseret på valgt aktivitetstype
+activityTypeSelect.addEventListener("change", function () { // eventlistener aktiveres, når der sker en ændring i dropdown-menuen
     const selectedType = this.value;
     let activities;
     if (selectedType === "everyday") {
@@ -70,7 +70,7 @@ activityTypeSelect.addEventListener("change", function () {
 // Funktion til at udfylde aktivitetsdropdown-menuen
 function populateActivityDropdown(activities) {
     activityNameSelect.innerHTML = "";
-    for (const activity in activities) {
+    for (const activity in activities) { // for-in loop til at iterere gennem objektet med aktiviteter
         const option = document.createElement("option");
         option.value = activity;
         option.textContent = activity;
@@ -80,7 +80,7 @@ function populateActivityDropdown(activities) {
 
 const gemKnap = document.getElementById("save");
 
-gemKnap.addEventListener("click", async function saveActivity() {
+gemKnap.addEventListener("click", async function saveActivity() { // eventlistener aktiveres, når der klikkes på gem-knappen
         alert('Aktivitet gemt!'); 
     try {
         // Hent brugeroplysninger fra localStorage
@@ -90,10 +90,11 @@ gemKnap.addEventListener("click", async function saveActivity() {
         }
         const userId = user.userId;
 
+        // Hent data fra inputfelterne
         const activityType = document.getElementById('activityType').value;
         const activityName = document.getElementById('activityName').value;
         const minutes = document.getElementById('minutes').value;
-        console.log(userId, activityType.value, activityName.value, minutes.value);
+
         // Send POST-anmodning til serveren
         const response = await fetch('http://localhost:3000/api/activity/activityTracker', {
             method: 'POST',
@@ -105,10 +106,11 @@ gemKnap.addEventListener("click", async function saveActivity() {
                 minutes,
             })
         });
-
         const data = await response.json();
+        
         if (response.ok) {
             return data;
+        // Håndter fejl fra serveren
         } else {
             throw new Error(data.message);
         }
