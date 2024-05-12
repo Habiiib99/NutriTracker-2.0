@@ -3,10 +3,12 @@
 
 const ingredient = document.getElementById('ingredient');
 let ingredientId;
-//Kode til at søge efter ingredienser
+
+// Samme kode som i mealCreator.js
+// Koden genbruges, da der er behov for samme funktionalitet
 function populateIngredientList(results) {
   const ingredientList = document.getElementById('ingredient-list');
-  // fjerner tidligere resultater
+  
   ingredientList.innerHTML = ''
 
   for (const result of results) {
@@ -114,14 +116,16 @@ async function fetchAndValidateNutrient(foodID, sortKey, nutrientName) {
   }
 }
 
+// Funktion som henter næringsværdier for en ingrediens og sender dem til databasen
 async function addIngredient(ingredientName) {
   const foodID = document.getElementById('foodID').value;
   const kcal = await fetchAndValidateNutrient(foodID, kcalKey, 'Energy');
   const protein = await fetchAndValidateNutrient(foodID, ProteinKey, 'Protein');
   const fat = await fetchAndValidateNutrient(foodID, fatKey, 'Fat');
   const fiber = await fetchAndValidateNutrient(foodID, fiberKey, 'Fiber');
+  // Try-catch blok til at sende data til databasen
   try {
-    const response = await fetch('http://localhost:3000/api/mealingredienttracker/meal-tracker/ingredient', {
+    const response = await fetch('http://localhost:3000/api/mealingredienttracker/meal-tracker/ingredient', { // Data sendes først til ingredient-tabellen
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -145,7 +149,9 @@ async function addIngredient(ingredientName) {
     throw error;
   }}
 
-  async function addMealIngredient(ingredientId, weight) {
+  // Lignende funktion som ovenfor, men denne gang sendes data til meal-ingredients-tabellen
+  // Dette er således, så at vi kan tracke ingredienserne
+  async function addMealIngredient(ingredientId, weight) { // IngrediensId vil have en relation til ingredient-tabellen
     const userId = JSON.parse(localStorage.getItem('user')).userId;
   
     try {
@@ -172,8 +178,8 @@ async function addIngredient(ingredientName) {
   }}
 
 
-
-  async function trackIngredient(mealIngredientId, weight, location) {
+  // Endnu en async funktion, som denne gang tracker ingredienserne
+  async function trackIngredient(mealIngredientId, weight, location) { // mealIngredientId vil have en relation til meal_ingredients-tabellen
 
     try {
     const response = await fetch('http://localhost:3000/api/mealingredienttracker/meal-tracker/track-ingredient', {
@@ -183,7 +189,7 @@ async function addIngredient(ingredientName) {
         mealIngredientId: mealIngredientId,
         weight: weight,
         userId: JSON.parse(localStorage.getItem('user'))?.userId,
-        consumptionDate: new Date().toISOString().slice(0, 16).replace('T', ' '),
+        consumptionDate: new Date().toISOString().slice(0, 16).replace('T', ' '), // .slice og .replace bruges til at formatere datoen
         location: location
       })
     });
@@ -198,17 +204,17 @@ async function addIngredient(ingredientName) {
 
 
   async function getLocation() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { // promise bruges, da geolocation er asynkront
       // Hent brugerens geolocation
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          (position) => {
+          (position) => { // Hvis geolocation er tilgængelig, hentes brugerens position og gemmes
             const location = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
             resolve(location);
           },
           (error) => {
             console.warn('Geolocation ikke tilgængelig:', error.message);
-            resolve('Unknown');
+            resolve('Unknown'); // Hvis geolocation ikke er tilgængelig, sættes location til 'Unknown'
           }
         );
       } else {
@@ -218,25 +224,25 @@ async function addIngredient(ingredientName) {
   }
 
 
-
+  // Funktion som samler det hele og registrerer ingrediensen i alle tre tabeller
   async function registerIngredient() {
     const ingredientName = document.getElementById('ingredient').value;
     const weight = document.getElementById('ingredient-weight').value;
   
     try {
-      const response = await addIngredient(ingredientName);
+      const response = await addIngredient(ingredientName); // Ingrediens tilføjes til ingredient-tabellen
       const ingredientId = response.ingredientId;
-      const response1 = await addMealIngredient(ingredientId, weight);
+      const response1 = await addMealIngredient(ingredientId, weight);  // Ingrediens tilføjes til meal_ingredients-tabellen med ingredientId fra ingredient-tabellen
       const mealIngredientId = response1.mealIngredientId;
       
       // Hent brugerens position
-      const location = await getLocation();
+      const location = await getLocation();  // getLocation bruges til at hente brugerens position
     
-      await trackIngredient(mealIngredientId, weight, location);
+      await trackIngredient(mealIngredientId, weight, location); // Ingrediens trackes i track_ingredient-tabellen med mealIngredientId fra meal_ingredients-tabellen
     
 
       alert('Ingrediens tilføjet med succes til begge tabeller');
-      updateIngredientLogDisplay()
+      updateIngredientLogDisplay() // UI opdateres
   
     } catch (error) {
       console.error('Fejl:', error);
@@ -244,6 +250,7 @@ async function addIngredient(ingredientName) {
     }
   }
   
+  // Eventlistener som kører når der klikkes på knappen
   document.getElementById('ingredient-registration-form').addEventListener('submit', function (event) {
     event.preventDefault();
     registerIngredient();
