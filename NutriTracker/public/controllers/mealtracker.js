@@ -128,7 +128,7 @@ async function updateMealLogDisplay() {
       const mealEntryDiv = document.createElement('div'); // Opret en div
       mealEntryDiv.className = 'meal-entry';  // Sæt klassenavn for div'en
       // Ift. sql injection, så er det vigtigt at bruge innerHTML til at indsætte data i HTML
-      mealEntryDiv.innerHTML = ` // Indsæt HTML i div'en
+      mealEntryDiv.innerHTML = ` 
           <div class="meal-details">
             <span class="meal-name">${entry.mealName}</span>  
             <span class="meal-weight">${entry.weight}g</span>
