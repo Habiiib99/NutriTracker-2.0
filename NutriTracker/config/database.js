@@ -6,7 +6,7 @@ export const dbConfig = {
   user: 'Habib',
   password: 'Dhdh2399!',
   server: 'servertesthabib.database.windows.net',
-  database: 'NutriTrackerOK',
+  database: 'NutriTracker1',
   options: {
     encrypt: true, // for Azure
     trustServerCertificate: false // kun nødvendigt til lokal udvikling
