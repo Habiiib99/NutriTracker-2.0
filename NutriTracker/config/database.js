@@ -1,4 +1,3 @@
-// database.js (Placer i rodmappen eller en passende undermappe)
 import sql from 'mssql';
 
 // Definer databasekonfigurationen
