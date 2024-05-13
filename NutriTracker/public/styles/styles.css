@@ -2,21 +2,21 @@
 body,
 html {
   font-family: "Nunito", sans-serif;
-  background-color: #def6d8; /* Baggrundsfarve */
-  color: #424242; /* Tekstfarve */
+  background-color: #def6d8;
+  color: #424242;
   margin: 0;
   line-height: 1.6;
 }
 
 /* Navigationsbar Styles */
 .navbar {
-  background-color: #91c789; /* Primær grøn farve */
-  padding: 10px 0; /* Reducer padding for at matche eksemplet */
+  background-color: #91c789;
+  padding: 10px 0;
   text-align: center;
-  display: flex; /* Gør navigationsbaren til en flex container */
-  justify-content: center; /* Centrerer links i navigationsbaren */
-  align-items: center; /* Centrerer elementer vertikalt */
-  position: relative; /* Positioneret relativt for at placere logoet absolut inden for navigationsbaren */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .navbar a {
@@ -25,7 +25,7 @@ html {
   margin: 0 15px;
   font-weight: bold;
   padding: 10px 20px;
-  border-radius: 10px; /* Afrundede hjørner */
+  border-radius: 10px;
 }
 
 .navbar a:hover,
@@ -36,30 +36,28 @@ html {
 /* Logo Style */
 .navbar-logo {
   position: absolute; /* Absolut positionering inden i navigationsbaren */
-  left: 20px; /* Placering fra venstre side */
-  top: 50%; /* Start fra toppen halvvejs ned */
+  left: 20px;
+  top: 50%;
   transform: translateY(
     -50%
   ); /* Skub op med halvdelen af logoets højde for at centrere vertikalt */
-  height: 40px; /* Højde på logoet */
+  height: 40px;
 }
-
-
 
 /* Stat Block Styles */
 .stat {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrer vertikalt */
-  align-items: center; /* Centrer  horisontalt */
+  justify-content: center;
+  align-items: center;
   text-align: center;
   background: #f5f5f5;
   border: solid;
   border-radius: 10px;
   border-width: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  height: 100px; /* Fixed height for each stat block */
+  height: 100px;
 }
 
 /* Specific styles for ikonerne and teksten */
@@ -94,7 +92,7 @@ html {
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px #bdbdbd;
 }
 
 /*Style for når der oprettes et måltid*/
@@ -109,19 +107,20 @@ html {
   margin-right: 10px;
 }
 
+/*knap til at lave meal*/
 .create-meal-btn {
   padding: 10px 20px;
   background-color: #ffab40;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-
+/*knap til at tilføje ingredient*/
 .add-ingredient-btn {
   padding: 10px 20px;
   background-color: #569bd5;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -133,7 +132,7 @@ html {
 
 /* Yderligere styles for created meals list */
 .created-meals-list .meal-entry {
-  background: #f9f9f9;
+  background: #f5f5f5;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
@@ -149,13 +148,13 @@ html {
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px #bdbdbd;
 }
 
 /* Meal Registration Form Styles */
 #meal-registration-form {
   display: grid;
-  grid-template-columns: 1fr auto auto; /* Tilpass dette efter dine inputs */
+  grid-template-columns: 1fr auto auto;
   gap: 20px;
   align-items: center;
   margin-bottom: 20px;
@@ -172,7 +171,7 @@ html {
 #meal-registration-form button {
   padding: 10px 20px;
   background-color: #ffab40;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -181,7 +180,7 @@ html {
 #water-intake-form button {
   padding: 10px 20px;
   background-color: #569bd5;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -191,7 +190,7 @@ html {
 #registered-meals .meal-entry {
   display: flex;
   justify-content: space-between;
-  background: #f9f9f9;
+  background: #f5f5f5;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
@@ -202,9 +201,9 @@ html {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #f2f2f2;
+  background-color: #f5f5f5;
   border-radius: 5px;
-  margin-bottom: 10px; /* Tilføjer afstand mellem hver meal entry */
+  margin-bottom: 10px;
 }
 
 .meal-details {
@@ -217,7 +216,7 @@ html {
 .meal-weight,
 .meal-time {
   padding: 5px 10px;
-  background-color: #e9ecef;
+  background-color: #e9e9e9;
   border-radius: 5px;
 }
 
@@ -232,16 +231,17 @@ html {
 .save-meal-changes {
   padding: 10px 20px;
   background-color: #91c789;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
+/*knap til at slette et meal*/
 .delete-meal-btn {
   padding: 10px 20px;
-  color: white;
-  background-color: #f29a8a; /* Rød for sletning */
+  color: #ffffff;
+  background-color: #f29a8a;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -251,16 +251,17 @@ html {
 .save-water-changes {
   padding: 5px 10px;
   background-color: #91c789;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
+/*knap til at slette vand*/
 .delete-water-btn {
   padding: 5px 10px;
-  color: white;
-  background-color: #f29a8a; /* Rød for sletning */
+  color: #ffffff;
+  background-color: #f29a8a;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -273,7 +274,7 @@ html {
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px #bdbdbd;
 }
 
 .report-entries {
@@ -286,23 +287,20 @@ html {
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #f2f2f2;
+  background-color: #f5f5f5;
   border-radius: 5px;
 }
 
 .report-entry > div {
   padding: 5px 10px;
   text-align: center;
-  /* Du kan tilføje specifikke farver og stilarter for hver type data */
 }
-
-
 
 /* Stil for tabel */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px; /* Afstand til elementet ovenfor */
+  margin-top: 20px;
 }
 
 th,
@@ -314,7 +312,7 @@ td {
 
 th {
   background-color: #91c789;
-  color: white;
+  color: #ffffff;
 }
 
 /* Tilføjelse af hover-effekt til tabellinjer */
@@ -322,29 +320,26 @@ tbody tr:hover {
   background-color: #f5f5f5;
 }
 
-
-
-
 /* Center the login form */
 .login-container {
   width: 100%;
-  max-width: 400px; /* Maximum width for the form */
-  margin: 100px auto; /* Centers the form horizontally and vertically */
+  max-width: 400px; 
+  margin: 100px auto; 
   padding: 30px;
-  background-color: #F5F5F5; /* Light grey */
+  background-color: #f5f5f5;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: 0 4px 8px #bdbdbd; 
   text-align: center;
 }
 
 /* Style for form inputs and buttons */
 #login-form input[type="text"],
 #login-form input[type="password"] {
-  width: 100%; /* Full width of the form */
+  width: 100%; 
   padding: 10px;
-  margin-bottom: 15px; /* Space between inputs */
+  margin-bottom: 15px; 
   border-radius: 5px;
-  border: 1px solid #9E9E9E; /* Light grey from black scale */
+  border: 1px solid #9e9e9e; 
 }
 
 #login-button,
@@ -352,40 +347,39 @@ tbody tr:hover {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #91C789; /* Primary green color */
-  color: #FFFFFF; /* White */
+  background-color: #91c789; 
+  color: #ffffff; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 #redirect-to-register-button {
-  background-color: #FFAB40; /* Accent orange from secondary colors */
+  background-color: #ffab40; 
 }
 
 #login-button:hover {
-  background-color: #81B77E; /* Slightly darker shade of primary green */
+  background-color: #81b77e; 
 }
 
 #redirect-to-register-button:hover {
-  background-color: #E89A30; /* Slightly darker orange */
+  background-color: #e89a30; 
 }
-
 
 /* Register form styles */
 .register-container {
   width: 100%;
   max-width: 500px;
-  margin: 80px auto; /* Centers horizontally and vertically */
+  margin: 80px auto; 
   padding: 40px;
-  background-color: #F5F5F5; /* Light grey */
+  background-color: #f5f5f5;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px #bdbdbd;
   text-align: center;
 }
 
 .register-container h1 {
-  color: #424242; /* Dark grey */
+  color: #424242; 
   margin-bottom: 20px;
 }
 
@@ -393,11 +387,11 @@ tbody tr:hover {
 #register-form input[type="number"],
 #register-form input[type="password"],
 #register-form select {
-  width: 100%; /* Full width */
+  width: 100%; 
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 5px;
-  border: 1px solid #9E9E9E; /* Light grey */
+  border: 1px solid #9e9e9e; 
 }
 
 #register-button,
@@ -405,23 +399,23 @@ tbody tr:hover {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #91C789; /* Primary green color */
-  color: #FFFFFF; /* White */
+  background-color: #91c789; 
+  color: #ffffff; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 #redirect-to-login-button {
-  background-color: #FFAB40; /* Accent orange from secondary palette */
+  background-color: #ffab40; 
 }
 
 #register-button:hover {
-  background-color: #81B77E; /* Darker shade of primary green */
+  background-color: #81b77e; 
 }
 
 #redirect-to-login-button:hover {
-  background-color: #E89A30; /* Darker orange */
+  background-color: #e89a30; /
 }
 
 .register-container span {
@@ -430,34 +424,31 @@ tbody tr:hover {
   color: #424242;
 }
 
-
-
-
 /* Profile page styles */
 .profile-container {
   width: 100%;
   max-width: 600px;
-  margin: 80px auto; /* Centers horizontally and vertically */
+  margin: 80px auto; 
   padding: 40px;
-  background-color: #F5F5F5; /* Light grey */
+  background-color: #f5f5f5;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px #bdbdbd;
   text-align: center;
 }
 
 .profile-container h1 {
-  color: #424242; /* Dark grey */
+  color: #424242;
   margin-bottom: 20px;
 }
 
 #profile-form input[type="text"],
 #profile-form input[type="number"],
 #profile-form select {
-  width: 100%; /* Full width */
+  width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 5px;
-  border: 1px solid #9E9E9E; /* Light grey */
+  border: 1px solid #9e9e9e;
 }
 
 #update-button,
@@ -466,31 +457,31 @@ tbody tr:hover {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #91C789; /* Primary green */
-  color: #FFFFFF; /* White */
+  background-color: #91c789;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 #logout-button {
-  background-color: #FFAB40; /* Accent orange */
+  background-color: #ffab40;
 }
 
 #delete-button {
-  background-color: #F29A8A; /* Accent red */
+  background-color: #f29a8a;
 }
 
 #update-button:hover {
-  background-color: #81B77E; /* Darker shade of primary green */
+  background-color: #81b77e;
 }
 
 #logout-button:hover {
-  background-color: #E89A30; /* Darker orange */
+  background-color: #e89a30;
 }
 
 #delete-button:hover {
-  background-color: #E17979; /* Darker red */
+  background-color: #e17979;
 }
 
 .profile-container span {
@@ -500,50 +491,49 @@ tbody tr:hover {
   margin-bottom: 15px;
 }
 
-
 /* Adjusted Activity Container styles */
 .activity-container {
   width: 100%;
   max-width: 500px;
-  margin: 80px auto; /* Centers horizontally and vertically */
+  margin: 80px auto; 
   padding: 30px;
-  background-color: #F5F5F5; /* Light grey */
+  background-color: #f5f5f5;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: 0 4px 8px #bdbdbd; 
   text-align: center;
 }
 
 .activity-container h1 {
-  color: #424242; /* Dark grey */
-  margin-bottom: 30px; /* Adds spacing below the title */
+  color: #424242;
+  margin-bottom: 30px;
 }
 
 #activity-form label {
-  display: block; /* Makes label take full width */
-  margin-bottom: 10px; /* Adds spacing after the label */
-  text-align: left; /* Aligns text to the left */
+  display: block; 
+  margin-bottom: 10px; 
+  text-align: left; 
 }
 
 #activity-form select,
 #activity-form input[type="number"] {
   width: 100%;
-  margin-bottom: 20px; /* Increase spacing between form elements */
+  margin-bottom: 20px; 
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #9E9E9E; /* Light grey */
+  border: 1px solid #9e9e9e; 
 }
 
 #save {
   width: 100%;
   padding: 10px;
-  margin-top: 30px; /* Adds spacing above the button */
-  background-color: #FFAB40; /* Change to accent orange color */
-  color: #FFFFFF; /* White */
+  margin-top: 30px; 
+  background-color: #ffab40; 
+  color: #ffffff; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 #save:hover {
-  background-color: #E89A30; /* Darker shade of accent orange */
+  background-color: #ffab40; 
 }
